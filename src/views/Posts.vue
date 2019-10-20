@@ -102,7 +102,6 @@ export default {
         max: 6
       }
       this.XbortGetRequest('', params, result => {
-        console.log(this.offset)
         if (result.result) {
           if (result.data.length > 0 && this.offset > 0) {
             for (let i = 0; i < result.data.length; i++) {
