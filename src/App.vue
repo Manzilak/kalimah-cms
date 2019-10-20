@@ -1,32 +1,29 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Head v-if="userLogged"/>
     <router-view/>
+    <Foot v-if="userLogged"/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+// Get users logged status
+import { mapGetters } from 'vuex'
 
-#nav {
-  padding: 30px;
+// Get header and footer components
+import Head from './components/Head'
+import Foot from './components/Foot'
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+export default {
+  name: 'app',
+  components: {
+    Head,
+    Foot
+  },
+  computed: {
+    ...mapGetters({
+      userLogged: 'getLogged'
+    })
   }
 }
-</style>
+</script>

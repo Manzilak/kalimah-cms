@@ -1,0 +1,121 @@
+/*
+  Fonts
+*/
+@font-face {
+  font-family: KalimahRegular;
+  src: url('../fonts/Nunito-Regular.ttf');
+}
+body, button, input, select, textarea {
+  font-family: KalimahRegular;
+}
+.navbar.has-shadow {
+  -webkit-box-shadow: 0px 0px 25px 5px #eeeeee;
+  -moz-box-shadow: 0px 0px 25px 5px #eeeeee;
+  box-shadow: 0px 0px 20px 8px rgba(125, 125, 125, 0.15), 0 0 0 0px rgba(125, 125, 125, 0.15);
+}
+.input, .input:focus, .taginput .taginput-container.is-focusable, .textarea {
+  box-shadow: none;
+  border: 0;
+  border-bottom: 1px solid lightgrey;
+  border-radius: 0;
+}
+.sidenav {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 2%;
+  z-index: 1;
+}
+@media screen and (min-width: 800px) {
+  .sidenav {
+    margin-top: 30px;
+  }
+}
+@media screen and (max-width: 799px) {
+  .fielder {
+    float: left;
+    margin-right: 8px;
+  }
+  .switcher {
+    margin-top: 5px;
+  }
+  .column {
+    clear: both;
+  }
+}
+.dropdown-item {
+  padding: .1rem .5rem;
+}
+
+/* Slider side panle */
+.slideout {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 45%;
+  transform: translateX(100%);
+  transition: .3s ease-out;
+  z-index: 1000;
+  overflow: hidden;
+}
+.active {
+  transform: translateX(0%);
+}
+.panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  right: -17px;
+  overflow-y: scroll;
+  padding: 1em;
+}
+@media screen and (min-width: 1950px) {
+  .slideout {
+    width: 35%;
+  }
+}
+@media screen and (max-width: 1949px) {
+  .slideout {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 1749px) {
+  .slideout {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 1150px) {
+  .slideout {
+    width: 85%;
+  }
+}
+@media screen and (max-width: 799px) {
+  .slideout {
+    width: 100%;
+  }
+}
+#postPre {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 999; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Categories and tags tables */
+/* .t_n_w => Table Numbers Width */
+.t_n_w {
+  width: 20px;
+}
+/* .t_o_w => Table Options Width */
+.t_o_w {
+  width: 110px;
+}
