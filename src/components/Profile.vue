@@ -14,7 +14,7 @@
           <b-input v-model="userName" minlength="6" maxlength="64" placeholder="Your name..."></b-input>
         </b-field>
         <b-field class="is-pulled-right">
-          <button class="button is-primary" @click.prevent="addCategory">Save</button>
+          <button class="button is-primary" @click.prevent="updateProfile">Save</button>
         </b-field>
       </div>
     </div>
