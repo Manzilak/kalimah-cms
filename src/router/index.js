@@ -95,6 +95,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: () => import(/* webpackChunkName: "km-login-page" */ '@/views/Login.vue')
+  },
+  {
+    path: '*',
+    name: 'error',
+    component: () => import(/* webpackChunkName: "error" */ '@/views/Error.vue')
   }
 ]
 
