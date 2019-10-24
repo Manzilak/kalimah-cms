@@ -20,6 +20,9 @@ export default {
     Head,
     Foot
   },
+  beforeCreate () {
+    this.$store.dispatch('loadConfig')
+  },
   computed: {
     ...mapGetters({
       userLogged: 'getLogged'

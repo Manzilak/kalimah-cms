@@ -1,6 +1,6 @@
 {
   "name": "kalemah-cms",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --port 8088",

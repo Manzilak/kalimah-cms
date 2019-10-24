@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import Masonry from 'masonry-layout'
 import imagesLoaded from 'imagesloaded'
@@ -80,13 +81,15 @@ export default {
       posts: [],
       post: null,
       offset: 0,
-      gotPosts: false
+      gotPosts: false,
+      max: 0
     }
   },
   created () {
     this.getPosts()
   },
   updated () {
+    this.max = this.settings.pagination
     this.postsGrid()
   },
   methods: {
@@ -99,10 +102,9 @@ export default {
         request: 'km_posts',
         getby: 'postType:article',
         offset: this.offset,
-        max: 6
+        max: this.max
       }
       this.XbortGetRequest('', params, result => {
-        console.log(this.offset)
         if (result.result) {
           if (result.data.length > 0 && this.offset > 0) {
             for (let i = 0; i < result.data.length; i++) {
@@ -166,6 +168,11 @@ export default {
       let newOffset = this.offset + 6
       this.getPosts(newOffset, 1)
     }
+  },
+  computed: {
+    ...mapGetters({
+      settings: 'getSettings'
+    })
   }
 }
 </script>

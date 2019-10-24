@@ -20,13 +20,13 @@ Vue.mixin({
       return temporalDivElement.textContent || temporalDivElement.innerText || ''
     },
     successSave: function () {
-      this.$toast.open({
+      this.$buefy.toast.open({
         message: 'Saved!',
         type: 'is-success'
       })
     },
     errorMessage: function (error) {
-      this.$toast.open({
+      this.$buefy.toast.open({
         duration: 5000,
         message: `Error! ${error}`,
         type: 'is-danger'
