@@ -82,14 +82,13 @@ export default {
       post: null,
       offset: 0,
       gotPosts: false,
-      max: 0
+      max: 9
     }
   },
   created () {
     this.getPosts()
   },
   updated () {
-    this.max = this.settings.pagination
     this.postsGrid()
   },
   methods: {
@@ -165,7 +164,7 @@ export default {
     },
     morePosts: function () {
       this.gotPosts = false
-      let newOffset = this.offset + 6
+      let newOffset = this.offset + this.max
       this.getPosts(newOffset, 1)
     }
   },
