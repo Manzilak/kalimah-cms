@@ -25,7 +25,8 @@
     "vee-validate": "^3.2.1",
     "vue": "^2.6.11",
     "vue-router": "^3.0.6",
-    "vuex": "^3.1.2"
+    "vuex": "^3.1.2",
+    "xbuffer-connector": "^0.2.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.2",
