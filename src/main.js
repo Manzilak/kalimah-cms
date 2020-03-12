@@ -2,7 +2,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import axios from 'axios'
 import './mixins/xbort'
 import './mixins/helpers'
 import './filters'
@@ -18,8 +17,6 @@ Vue.use(Buefy, {
 })
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-
-axios.defaults.baseURL = `${store.state.config.XbUrl}/${store.state.config.XbPath}/${store.state.config.XbUser}/${store.state.config.XbProject}`
 
 Vue.config.productionTip = false
 

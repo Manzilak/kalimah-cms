@@ -8,9 +8,10 @@
               <img src="../assets/logo.png">
             </figure>
             <h1 class="title">Login</h1>
-            <div v-if="getError.show" class="notification is-danger">
+            <div v-if="error" class="notification is-danger">
               <button class="delete" @click="hideWarning"></button>
-              {{getError.message.message}}
+              <span v-if="message.code">Code: {{ message.code }}<br></span>
+              Message: {{ message.message }}
             </div>
             <ValidationObserver v-slot="{ valid }" tag="form" @submit.prevent="submitData">
               <div class="field">
@@ -37,7 +38,7 @@
               </div>
               <div class="field">
                 <p class="control">
-                  <button class="button is-primary" type="submit" :class="{ 'is-loading': getLoader }" :disabled="!valid">
+                  <button class="button is-primary" type="submit" :class="{ 'is-loading': isLoading }" :disabled="!valid">
                     Login
                   </button>
                 </p>
@@ -51,7 +52,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import Xbuffer from '../mixins/xbuffer'
 
 // Vee validation
 import { ValidationProvider, ValidationObserver, extend, localize } from 'vee-validate'
@@ -85,9 +86,9 @@ export default {
         getEmail: null,
         getPassword: null
       },
-      emailStat: false,
-      passwordStat: false,
-      getReady: false
+      isLoading: false,
+      error: false,
+      message: null
     }
   },
   components: {
@@ -96,17 +97,39 @@ export default {
   },
   methods: {
     submitData: function () {
-      this.$store.dispatch('getAccount', this.formData)
+      let loginParamas = {
+        data: {
+          appid: this.$store.state.config.XbAppID,
+          email: this.formData.getEmail,
+          password: this.formData.getPassword
+        },
+        path: 'auth',
+        method: 'post',
+        headears: false
+      }
+      this.isLoading = true
+      Xbuffer(loginParamas, result => {
+        this.isLoading = false
+        if (result.result && result.data.token) {
+          sessionStorage.setItem('XbToken', result.data.token)
+          sessionStorage.setItem('XbRefresh', result.data.refresh)
+          sessionStorage.setItem('XbUser', result.data.user)
+          sessionStorage.setItem('XbEmail', result.data.email)
+          sessionStorage.setItem('XbLogged', true)
+          this.$store.commit('setAccount', { token: result.data.token, refresh: result.data.refresh, user: result.data.account, email: result.data.email, logged: true })
+          this.error = false
+          this.message = null
+          this.$router.push({ path: '/' })
+        } else {
+          this.error = true
+          this.message = result.data
+        }
+      })
     },
     hideWarning: function () {
-      this.$store.dispatch('showError', { show: false, message: null })
+      this.error = false
+      this.message = null
     }
-  },
-  computed: {
-    ...mapGetters([
-      'getLoader',
-      'getError'
-    ])
   }
 }
 </script>

@@ -24,7 +24,7 @@
             <div class="card">
               <div class="card-image" v-if="value.postImage">
                 <figure class="image">
-                  <template v-if="value.postImage"><img :src="XbortGetMedia(value.postImage, 'medium')" /></template>
+                  <template v-if="value.postImage"><img :id="'image_' + key" :src="images(value.postImage, 'medium')" /></template>
                   <template v-else><img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image"></template>
                 </figure>
               </div>
@@ -68,6 +68,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Xbuffer from 'xbuffer-connector'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import Masonry from 'masonry-layout'
 import imagesLoaded from 'imagesloaded'
@@ -92,18 +93,24 @@ export default {
     this.postsGrid()
   },
   methods: {
+    images: function (file, size) {
+      return Xbuffer.media(file, size)
+    },
     getPosts: function (offset, load) {
       this.loadWait = load || 0
       this.offset = offset || 0
       var params = {
-        appid: this.$store.state.config.XbAppID,
-        type: 'data',
-        request: 'km_posts',
-        getby: 'postType:article',
-        offset: this.offset,
-        max: this.max
+        method: 'get',
+        headers: false,
+        data: {
+          type: 'data',
+          request: 'km_posts',
+          getby: 'postType:article',
+          offset: this.offset,
+          max: this.max
+        }
       }
-      this.XbortGetRequest('', params, result => {
+      Xbuffer.connect(params, result => {
         if (result.result) {
           if (result.data.length > 0 && this.offset > 0) {
             for (let i = 0; i < result.data.length; i++) {

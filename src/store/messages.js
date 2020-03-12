@@ -14,7 +14,6 @@ const state = {
     type: null,
     message: null
   },
-  login: false,
   signup: false,
   reload: false
 }
@@ -34,9 +33,6 @@ const getters = {
   },
   getMessage: (state) => {
     return state.message
-  },
-  getLogin: (state) => {
-    return state.login
   },
   getSignup: (state) => {
     return state.signup
@@ -76,9 +72,6 @@ const mutations = {
     }
     state.message = message
   },
-  setLogin: (state, login) => {
-    state.login = login
-  },
   setSignup: (state, signup) => {
     state.signup = signup
   },
@@ -102,9 +95,6 @@ const actions = {
   },
   showMessage: ({ commit }, message) => {
     commit('setMessage', message)
-  },
-  showLogin: ({ commit }, login) => {
-    commit('setLogin', login)
   },
   showSignup: ({ commit }, signup) => {
     commit('setLogin', signup)
